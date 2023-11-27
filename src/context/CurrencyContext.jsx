@@ -2,8 +2,8 @@ import { createContext,useState } from "react";
 
 export const CurrencyContext = createContext();
 const CurrencyProvider = ({ children }) => {
-    const [fromCurrency,setFromCurrency]=useState("🇯🇵 JPY - Japan");
-    const [toCurrency,setToCurrency]=useState('🇰🇷 KRW - South Korea');
+    const [fromCurrency,setFromCurrency]=useState(`🇺🇸 USD - United States`);
+    const [toCurrency,setToCurrency]=useState('🇮🇳 INR - India');
     const [firstAmount,setFirstAmount]=useState("");
 
   const value = {
