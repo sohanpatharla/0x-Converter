@@ -3,16 +3,40 @@ import { Button, Container, Grid, Typography } from '@mui/material'
 import { InputAmount } from './components/inputAmount'
 import { SelectCountry } from './components/selectCountry'
 import { SwitchCurrency } from './components/switchCurrency'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CurrencyContext } from './context/CurrencyContext'
+import axios from 'axios'
 
 function App() {
   const{
     fromCurrency,
     setFromCurrency,
     toCurrency,
-    setToCurrency
+    setToCurrency,
+    firstAmount,
+    setFirstAmount
   }=useContext(CurrencyContext)
+ 
+  const [resultCurrency,setResultCurrency]=useState(0);
+  const codeFromCurrency=fromCurrency.split(" ")[1];
+  const codeToCurrency=toCurrency.split(" ")[1];
+
+
+  useEffect (() => {
+    if(firstAmount) {
+    axios("https://api.freecurrencyapi.com/v1/latest", {
+    params: {
+    apikey: "fca_live_IQBnmVuzglUcXYrHdTWUMSVUfSFxSYoc0svZC8Kd",
+    base_currency: codeFromCurrency,
+    currencies:codeToCurrency
+    }
+    })
+    .then(response=>setResultCurrency(response.data.data[codeToCurrency]))
+    .catch(e=>console.log(e));
+
+    }
+    }, [firstAmount] )
+    console.log(resultCurrency);
 
   const boxStyles={
     background:"#fdfdfd",

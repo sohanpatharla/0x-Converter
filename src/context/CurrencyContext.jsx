@@ -4,12 +4,15 @@ export const CurrencyContext = createContext();
 const CurrencyProvider = ({ children }) => {
     const [fromCurrency,setFromCurrency]=useState("🇯🇵 JPY - Japan");
     const [toCurrency,setToCurrency]=useState('🇰🇷 KRW - South Korea');
+    const [firstAmount,setFirstAmount]=useState("");
 
   const value = {
     fromCurrency,
     setFromCurrency,
     toCurrency,
-    setToCurrency
+    setToCurrency,
+    firstAmount,
+    setFirstAmount
   };
   return (
     <CurrencyContext.Provider value={value}>
