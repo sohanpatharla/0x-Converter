@@ -1,5 +1,5 @@
 import './App.css'
-import { Button, Container, Grid, Typography } from '@mui/material'
+import { Box, Container, Grid, Typography } from '@mui/material'
 import { InputAmount } from './components/inputAmount'
 import { SelectCountry } from './components/selectCountry'
 import { SwitchCurrency } from './components/switchCurrency'
@@ -35,7 +35,7 @@ function App() {
     .catch(e=>console.log(e));
 
     }
-    }, [firstAmount] )
+    }, [firstAmount,fromCurrency,toCurrency])
     console.log(resultCurrency);
 
   const boxStyles={
@@ -50,16 +50,20 @@ function App() {
   }
   return (
     <Container maxWidth="md" sx={boxStyles}>
-    <Button>Click</Button>
-    <Typography variant='h5'sx={{marginBottom:"2rem"}}>Use our 0x-Converter and stay ahead of rest!</Typography>
+    <Typography variant='h5'sx={{marginBottom:"2rem",marginTop:"0.6rem"}}>Use our 0x-Converter and stay ahead of rest!</Typography>
     <Grid container spacing={2}>
     <InputAmount />
     <SelectCountry value={fromCurrency} setValue= {setFromCurrency} label="from" />
     <SwitchCurrency />
     <SelectCountry value={toCurrency} setValue= {setToCurrency} label="to"/>
     </Grid>
+    {firstAmount?(
+      <Box>
+        <Typography variant='h5' sx={{marginTop:"10px"}}>Result={resultCurrency}</Typography>
+      </Box>
+    ):""}
     </Container>
-    {}
+    
     
   )
 }
